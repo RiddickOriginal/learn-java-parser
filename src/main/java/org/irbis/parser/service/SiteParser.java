@@ -23,7 +23,7 @@ public class SiteParser {
             String author = article.select(".tm-user-info__username").text();
             String views = article.select(".tm-icon-counter__value").text()
                     .replace(".", "")
-                    .replace("K", "000");
+                    .replace("K", "00");
             String rating = article.select(".tm-votes-meter__value_rating").text();
             String commentsCount = article.select(".tm-article-comments-counter-link__value").text();
             Article articleObj = new Article(
