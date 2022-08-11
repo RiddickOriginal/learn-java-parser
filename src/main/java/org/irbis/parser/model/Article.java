@@ -16,12 +16,15 @@ public class Article {
     @SequenceGenerator(name = "article_id_gen", sequenceName = "article_id_seq", allocationSize = 1)
     private Long id;
     private String title;
-    private String author;
+
+    @ManyToOne
+    @JoinColumn(name = "author_id")
+    private Author author;
     private Integer views;
     private Integer rating;
     private Integer commentsCount;
 
-    public Article(String title, String author, Integer views, Integer rating, Integer commentsCount) {
+    public Article(String title, Author author, Integer views, Integer rating, Integer commentsCount) {
         this.title = title;
         this.author = author;
         this.views = views;

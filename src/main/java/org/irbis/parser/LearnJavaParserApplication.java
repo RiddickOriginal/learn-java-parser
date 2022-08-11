@@ -5,6 +5,7 @@ import org.irbis.parser.model.Article;
 import org.irbis.parser.repository.ArticleRepository;
 import org.irbis.parser.service.SiteLoader;
 import org.irbis.parser.service.SiteParser;
+import org.irbis.parser.service.Storage;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -20,7 +21,7 @@ import java.util.List;
 public class LearnJavaParserApplication implements CommandLineRunner {
     private final SiteLoader loader;
     private final SiteParser parser;
-    private final ArticleRepository articleRepository;
+    private final Storage storage;
 
     public static void main(String[] args) {
         SpringApplication.run(LearnJavaParserApplication.class, args);
@@ -30,19 +31,9 @@ public class LearnJavaParserApplication implements CommandLineRunner {
     public void run(String... args) throws Exception {
         String load = loader.load();
         List<Article> articleList = parser.parse(load);
-        articleRepository.saveAll(articleList);
-        System.out.println();
 
+        storage.save(articleList);
 
-//        JdbcTemplate template = new JdbcTemplate();
-//        List<Article> objects = template.query(
-//            "SELECT * FROM articles",
-//            (rs, rowNum) -> {
-//                long id = rs.getLong("id");
-//                String title = rs.getString("title");
-//                String author = rs.getString("author");
-//                return null;
-//            }
-//        );
+//        System.exit(0);
     }
 }

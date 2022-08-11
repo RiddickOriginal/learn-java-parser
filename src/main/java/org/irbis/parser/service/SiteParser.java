@@ -1,6 +1,7 @@
 package org.irbis.parser.service;
 
 import org.irbis.parser.model.Article;
+import org.irbis.parser.model.Author;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -28,7 +29,7 @@ public class SiteParser {
             String commentsCount = article.select(".tm-article-comments-counter-link__value").text();
             Article articleObj = new Article(
                     title,
-                    author,
+                    new Author(author),
                     Integer.parseInt(views),
                     Integer.parseInt(rating),
                     Integer.parseInt(commentsCount)
