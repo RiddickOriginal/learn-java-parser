@@ -1,9 +1,11 @@
 package org.irbis.parser.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.irbis.parser.model.Article;
+import org.irbis.parser.model.Author;
 import org.irbis.parser.service.ArticleService;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -12,6 +14,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class AppController {
     private final ArticleService articleService;
+    private final ObjectMapper objectMapper;
 
     //127.0.0.1:8080/get_top_10
 //    @GetMapping
@@ -25,5 +28,8 @@ public class AppController {
         return articleService.getAllByAuthor(name);
     }
 
-
+    @PostMapping("/add_author")
+    public boolean addAuthor(@RequestBody Author author) {
+        return articleService.addAuthor(author);
+    }
 }

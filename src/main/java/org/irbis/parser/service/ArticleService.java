@@ -32,4 +32,12 @@ public class ArticleService {
         Author author = optionalAuthor.get();
         return articleRepository.getAllByAuthor(author);
     }
+
+    public boolean addAuthor(Author author) {
+        if (authorRepository.existsByName(author.getName())) {
+            return false;
+        }
+        authorRepository.save(author);
+        return true;
+    }
 }
